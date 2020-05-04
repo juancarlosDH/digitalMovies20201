@@ -1,0 +1,48 @@
+<%- include('../partials/header'); %>
+
+    <section class="principal">
+
+      <article class="" id="peliculas">
+
+        <h2>Mayor Rating</h2>
+        <div class="peliculas">
+
+          <% for(peli of listado) { %>
+
+            <div class="pelicula">
+              <a href="/movies/detail/<%= peli.id %>">
+                <img src="<%= peli.poster %>" alt="" class="peli-img">
+              </a>
+              <img src="/img/premiere.png" alt="" class="banderin">
+              <h3 class="peli-titulo"><%= peli.title %></h3>
+            </div>
+          
+          <% } %>
+
+        </div>
+
+      </article>
+
+
+      <article class="" id="series">
+
+        <h2>Mas nuevas</h2>
+
+        <div class="peliculas">
+
+          <% listado.forEach(peli => { %>
+
+          <% }); %>
+
+        </div>
+
+      </article>
+
+
+    </section>
+
+
+  </div>
+
+
+<%- include('../partials/footer'); %>
