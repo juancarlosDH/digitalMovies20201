@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //por defecto express me lo configura
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/../public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

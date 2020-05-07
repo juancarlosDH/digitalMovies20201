@@ -1,6 +1,5 @@
 module.exports = {
-    
-    detail : (req, res) => {
+    index : function(req, res, next) {
 
         let pelis = [
             { 'title' : 'Guardianes de la Galaxia', 'id' : 1, 'poster' : '/img/movies/guardianesdelagalaxia.jpg'},
@@ -9,13 +8,16 @@ module.exports = {
             { 'title' : 'Capitan America', 'id' : 4, 'poster' : '/img/movies/capitanamerica.jpg'},
         ];
 
-        let pelicula = pelis.find(function (peli) {
-            return req.params.id == peli.id;
+        //envio datos la vista como segundo parametro
+        res.render('home', {
+            listado : pelis
         });
-        
-        res.render('movies/detail', {
-            pelicula : pelicula
-            });
-    }
+    },
 
+    faqs : (req, res) => {
+        res.send('Aqui van las preguntas frecuentes')
+    },
+    contact : (req, res) => {
+        res.send('formulario de contacto')
+    }
 }
