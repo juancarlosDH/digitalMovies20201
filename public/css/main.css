@@ -1,0 +1,45 @@
+.banner{
+    height: 100vh;
+    /* background-color: rgb(255, 255, 255); */
+    margin-bottom: 0;
+    position: relative;
+    margin-bottom: 10px;
+    background-image:url(/img/movies/increibles2.jpg);
+    top: 0;
+}
+
+.slide-caption{
+    max-width: 350px;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    padding: 20px;
+    background: rgba(0,0,0, 0.7);
+    color: #000;
+}
+
+.slide-caption h2{
+    color: #e62117;
+    font-weight: bold;
+}
+.slide-caption a{
+    color: #e62117;
+    text-decoration: none !important;
+    font-weight: bold;
+    outline: none;
+}
+
+.principal{
+    margin-top:5px;
+}
+
+@media (max-width:480px){
+    .banner {
+        padding-top: 15vh;
+    }
+
+    .slide-caption{
+        position: static;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,16 @@
+<div class="pelicula">
+    <div class="cont-imgs">
+      <a href="/movies/detail/<%= movie.id %>">
+        <img src="<%= movie.poster %>" alt="" class="peli-img">
+      </a>
+      <img src="/img/premiere.png" alt="" class="banderin">
+    </div>
+    <div class="rating">
+      <i class="fas fa-star star-rating"></i>
+      <span class="text-rating">9.0</span>
+    </div>
+    <h3 class="peli-titulo"><%= movie.title %></h3>
+    <div>
+      <a href="/movies/edit/<%= movie.id %>" class="btn btn-success">Editar</a>
+    </div>
+</div>

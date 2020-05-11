@@ -1,0 +1,63 @@
+<%- include('../partials/header'); %>
+
+    <section class="principal">
+
+      <article class="black-section" id="div-register">
+        <h2>Unete a Movies Drop</h2>
+         
+        <form class="forms">
+            <div class="form-group ">
+              <label class="" for="title">Nombre</label>
+              <input type="text" class="form-control" id="name" placeholder="Nombre">
+            </div>
+            <div class="form-group ">
+              <label class="" for="rating">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="text" class="form-control" id="email" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group ">
+              <label class="" for="password">Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-user-lock"></i></div>
+                </div>
+                <input type="text" class="form-control" id="password" placeholder="Password">
+              </div>
+            </div>
+            <div class="form-group ">
+                <label class="" for="c-password">Confirm Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-user-lock"></i></div>
+                  </div>
+                  <input type="text" class="form-control" id="c-password" placeholder="Confirm Password">
+                </div>
+              </div>
+            <div class="">
+              <label class="" for="poster">Avatar</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="avatar" required>
+                <label class="custom-file-label" for="avatar">Selecciona una imagen</label>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+            
+            <div class="separate-buttons">
+              <button type="submit" class="btn btn-success btn-block">Empecemos</button>
+            </div>
+        </form>
+            
+
+      </article>
+
+
+    </section>
+
+
+  </div>
+
+<%- include('../partials/footer'); %>

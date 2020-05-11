@@ -15,9 +15,17 @@ module.exports = {
     },
 
     faqs : (req, res) => {
-        res.send('Aqui van las preguntas frecuentes')
+        res.send('Aqui van las preguntas frecuentes');
     },
     contact : (req, res) => {
-        res.send('formulario de contacto')
+        res.send('formulario de contacto');
+    },
+
+    login : (req, res) => {
+        res.render('auth/login');
+    },
+
+    register : (req, res) => {
+        res.render('auth/register');
     }
 }

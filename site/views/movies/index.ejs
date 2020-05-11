@@ -4,12 +4,12 @@
 
     <section class="principal">
 
-      <article class="" id="peliculas">
+      <article class="black-section" id="peliculas">
 
         <div class="titulos">
           <h2>Listado de Peliculas</h2>
           <div>
-            <a href="/movies/new">Nueva</a>
+            <a href="/movies/new" class="btn btn-primary">Nueva</a>
           </div>
         </div>
         
@@ -17,14 +17,7 @@
 
           <% for(peli of listado) { %>
 
-            <div class="pelicula">
-              <a href="/movies/detail/<%= peli.id %>">
-                <img src="<%= peli.poster %>" alt="" class="peli-img">
-              </a>
-              <img src="/img/premiere.png" alt="" class="banderin">
-              <h3 class="peli-titulo"><%= peli.title %></h3>
-              <a href="/movies/edit/<%= peli.id %>">Editar  </a>
-            </div>
+            <%- include('item-movie', { movie : peli }) %>
           
           <% } %>
 

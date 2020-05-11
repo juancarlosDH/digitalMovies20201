@@ -12,6 +12,36 @@ body{
   background-attachment: fixed;
 }
 
+
+ul {
+  margin: 0;
+}
+
+h2{
+  font-size: 22px;
+  margin-bottom: 10px;
+  padding-left:10px;
+  border-left: 3px solid rgb(245,197,54);
+}
+
+h3 {
+  font-size: 1.2rem ;
+}
+
+a {
+  color : white;
+  text-decoration: none;;
+}
+
+a:hover {
+  color : white;
+  text-decoration: none;
+}
+
+#logo-mobile {
+  display: none;
+}
+
 #menu-toggle{
   display: none;
 }
@@ -19,21 +49,22 @@ body{
   display: none;
 }
 
-.container{
-  width: 1080px;
-  margin: 20px auto;
+.container-site{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 5px 0 5px;
 }
 
 header{
   background-color: rgba(255,255,255, 0.3);
 }
 
-.container header {
-  background-color: #363636;
+.container-site header {
+  background-color: #363636e5;
   /*background-color: rgba(54, 54, 54, 0.5);*/
   position: fixed;
   padding: 10px;
-  top: 15px;
+  top: 0;
   right: 0;
   left: 0;
   overflow: visible;
@@ -41,7 +72,7 @@ header{
 }
 .navigation{
   position: relative;
-  width: 960px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -52,7 +83,7 @@ header{
 
 .navigation-ul li{
    display: inline-block;
-   padding: 10px;
+   padding: 3px;
    cursor: pointer;
    font-weight: bold;
    font-size: 16px;
@@ -65,6 +96,17 @@ header{
   border-bottom: 2px solid white;
 }
 
+.navigation-ul li.li-logo:hover{
+  padding-bottom: 3px;
+  border-bottom: none;
+}
+
+.navigation-ul li.no-hover:hover{
+  border:none;
+  background: none;
+  padding-bottom: 3px;
+}
+
 .derechos{
   float: right;
 }
@@ -74,15 +116,11 @@ header{
 }
 
 .logo{
-  width: 100px;
-  position: absolute;
-  top: -20px;
-  right: 440px;
+  width: 60px;
 }
 
 .principal{
-  margin-top: 100px;
-  height: 4000px;
+  margin-top: 79px;
 }
 
 article{
@@ -94,10 +132,20 @@ h2{
   margin-bottom: 10px;
 }
 
-#peliculas, #series{
+.black-section{
   background-color: #252525;
   border-radius: 5px;
   padding: 15px 15px 25px 15px;
+}
+
+#div-login, #div-register{
+  max-width: 500px;
+  margin: 10px auto;
+}
+
+.separate-buttons{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .peliculas{
@@ -107,8 +155,15 @@ h2{
 }
 
 .pelicula{
+  font-size: 16px;
+  background-color: #1a1a1a;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.pelicula .cont-imgs{
   position: relative;
-  margin: 0 5px;
+  
 }
 
 .pelicula img.peli-img{
@@ -118,21 +173,66 @@ h2{
   position: absolute;
   top: 0;
   right: 10px;
-  width: 40px;
+  width: 35px;
 }
 .pelicula h3.peli-titulo{
+  font-size: 16px;
   text-align: center;
-  margin: 10px 0;
+}
+.pelicula .rating {
+  padding: 10px;
+}
+
+.pelicula .rating .text-rating{
+  color: #bbbbbb;
+}
+
+.star-rating {
+  color: rgb(245,197,54);
+}
+
+form.forms .fas{
+  color: #495057;
 }
 
 
+.bd-callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #bbbbbb;
+  border-left-width: .25rem;
+  border-radius: .25rem;
+}
+
+.bd-callout-detail {
+  border-left-color: rgb(245,197,54);
+}
 
 @media(max-width:768px){
+
+  header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .img-menu{
+    display: inline-block;
+    font-size: 40px;
+    cursor: pointer;
+  }
+
+  #logo-mobile {
+    display: block;
+  }
+  #logo-mobile .logo {
+    display: block;
+  }
 
   #menu-toggle{
     display: inline-block;
   }
-  .container{
+  .container-site{
     width: 100%;
   }
   .peliculas{
@@ -153,10 +253,9 @@ h2{
 
   .navigation{
     position: absolute;
-    top: 50px;
+    top: 58px;
     right: 0;
     width: 100%;
-    height: 100vh;
   }
   .izquierdos{
     margin-top: 15px;
@@ -168,24 +267,24 @@ h2{
     float: right;
   }
 
-  .logo{
-    position: absolute;
-    top: -60px;
-    left: 0;
-  }
 
   .navigation-ul{
-    background-color: rgba(24,24,24,.9);
+    background-color: #363636e5;
     width: 300px;
     text-align:right;
     display: none;
   }
-  .container nav ul li{
+
+  .navigation-ul li.li-logo{
+    display: none;
+  }
+
+  .container-site nav ul li{
     display: block;
   }
 }
 
-@media (max-width:420px){
+@media (max-width:480px){
   .peliculas{
     grid-template-columns: 1fr;
   }

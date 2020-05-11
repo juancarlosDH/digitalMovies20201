@@ -1,22 +1,53 @@
 <%- include('../partials/header'); %>
+  <link rel="stylesheet" href="/css/movies/detail.css">
+  <section class="principal">
 
-    <section class="principal">
+    <article class="black-section movie-detail">
 
-      <article class="" id="peliculas">
+      <div class="img-movie">
+        <img src="<%= pelicula.poster %>" alt="" class="peli-img">
+      </div>
+
+
+      <div class="text-movie">
         <h2><%= pelicula.title %></h2>
-         
-        <div class="pelicula">
-            <img src="<%= pelicula.poster %>" alt="" class="peli-img">
-            <img src="/img/premiere.png" alt="" class="banderin">
+
+        <div class="mini-details ">
+          <div class="rating mini-detail-item">
+            <i class="fas fa-star star-rating"></i>
+            <span class="text-rating">9.0</span>
+          </div>
+
+          <div class="mini-detail-item">
+            3 h 1 min
+          </div>
+
+          <div class="mini-detail-item">
+            2000
+          </div>
+
         </div>
-            
+        
 
-      </article>
+        <div>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non illo id distinctio quae rem eaque sit. Cumque, tenetur ea laborum, facere ad optio similique sunt quae blanditiis quas maxime non?
+        </div>
+
+        <div>
+          <div class="bd-callout bd-callout-detail">Genero</div class="bd-callout bd-callout-primary">
+          <div class="bd-callout bd-callout-detail">Actores</div class="bd-callout bd-callout-primary">
+        </div>
+
+      </div>
+        
+      
+          
+
+    </article>
 
 
-    </section>
+  </section>
 
 
-  </div>
 
 <%- include('../partials/footer'); %>
