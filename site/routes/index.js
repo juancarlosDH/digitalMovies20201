@@ -11,6 +11,8 @@ router.get('/faqs', controller.faqs);
 router.get('/contact', controller.contact);
 
 router.get('/login', controller.login);
+
 router.get('/register', controller.register);
+router.post('/register', controller.registerUser);
 
 module.exports = router;

@@ -5,10 +5,10 @@
       <article class="black-section" id="div-register">
         <h2>Unete a Movies Drop</h2>
          
-        <form class="forms">
+        <form class="forms" action="" method="POST">
             <div class="form-group ">
               <label class="" for="title">Nombre</label>
-              <input type="text" class="form-control" id="name" placeholder="Nombre">
+              <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
             </div>
             <div class="form-group ">
               <label class="" for="rating">Email</label>
@@ -16,7 +16,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">@</div>
                 </div>
-                <input type="text" class="form-control" id="email" placeholder="Email">
+                <input type="text" class="form-control" id="email" placeholder="Email" name="email">
               </div>
             </div>
             <div class="form-group ">
@@ -25,7 +25,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fas fa-user-lock"></i></div>
                 </div>
-                <input type="text" class="form-control" id="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
               </div>
             </div>
             <div class="form-group ">
@@ -34,20 +34,20 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-user-lock"></i></div>
                   </div>
-                  <input type="text" class="form-control" id="c-password" placeholder="Confirm Password">
+                  <input type="password" class="form-control" id="c-password" placeholder="Confirm Password" name="c_password">
                 </div>
               </div>
             <div class="">
               <label class="" for="poster">Avatar</label>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="avatar" required>
+                <input type="file" class="custom-file-input" id="avatar">
                 <label class="custom-file-label" for="avatar">Selecciona una imagen</label>
                 <div class="invalid-feedback"></div>
               </div>
             </div>
             
             <div class="separate-buttons">
-              <button type="submit" class="btn btn-success btn-block">Empecemos</button>
+              <button type="submit" class="btn btn-success btn-block">Empecemos <i class="fas fa-paper-plane"></i></button>
             </div>
         </form>
             

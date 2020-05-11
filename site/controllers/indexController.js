@@ -27,5 +27,19 @@ module.exports = {
 
     register : (req, res) => {
         res.render('auth/register');
+    },
+
+    registerUser : (req, res) => {
+        console.log(req.body);
+
+        //aqui deberia de validar los datos, que no esten vacios, etc
+
+        //imaginemos que lo guardemos en el json o base de datos
+
+            //TODO que logee al usuario y muestre la pagina del perfil
+
+            //enviar a otro html que se registro exitosamente
+
+        res.redirect('/');
     }
 }
