@@ -1,11 +1,13 @@
 <%- include('../partials/header'); %>
 
+<link rel="stylesheet" href="/css/forms/register.css">
+
     <section class="principal">
 
       <article class="black-section" id="div-register">
         <h2>Unete a Movies Drop</h2>
          
-        <form class="forms" action="" method="POST">
+        <form class="forms" action="" method="POST" enctype="multipart/form-data">
             <div class="form-group ">
               <label class="" for="title">Nombre</label>
               <input type="text" class="form-control" id="name" placeholder="Nombre" name="name">
@@ -40,7 +42,7 @@
             <div class="">
               <label class="" for="poster">Avatar</label>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="avatar">
+                <input type="file" class="custom-file-input" id="avatar" name="avatar">
                 <label class="custom-file-label" for="avatar">Selecciona una imagen</label>
                 <div class="invalid-feedback"></div>
               </div>

@@ -5,10 +5,14 @@
       <article class="black-section" id="">
         <h2>Nueva Pelicula</h2>
          
-        <form>
+        <form method="POST" action="" enctype="multipart/form-data">
             <div class="form-group ">
               <label class="" for="title">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="Title">
+              <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+            </div>
+            <div class="form-group ">
+              <label class="" for="title">Password</label>
+              <input type="password" class="form-control" id="title" placeholder="Aqui el pass de la peli" name="password">
             </div>
             <div class="form-group ">
               <label class="" for="rating">Rating</label>
@@ -16,13 +20,13 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fas fa-star star-rating"></i></div>
                 </div>
-                <input type="text" class="form-control" id="rating" placeholder="Rating">
+                <input type="text" class="form-control" id="rating" placeholder="Rating" name="rating">
               </div>
             </div>
             <div class="">
               <label class="" for="poster">Poster</label>
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="poster" required>
+                <input type="file" class="custom-file-input" id="poster" name="poster">
                 <label class="custom-file-label" for="poster">Selecciona una imagen</label>
                 <div class="invalid-feedback">Example invalid custom file feedback</div>
               </div>

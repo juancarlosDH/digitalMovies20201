@@ -1,0 +1,7 @@
+#name:hover {
+    background-color: aquamarine;
+}
+
+#name:focus ~ label{
+    background-color: blue;
+}
