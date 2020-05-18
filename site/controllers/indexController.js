@@ -1,6 +1,8 @@
 // recuerden instalar con npm: nm install bcrypjs --save
 const bcryptjs = require('bcryptjs');
 
+const {check, validationResult, body} = require('express-validator')
+
 module.exports = {
     index : function(req, res, next) {
 
@@ -35,6 +37,12 @@ module.exports = {
 
     registerUser : (req, res) => {
         //aqui deberia de validar los datos, que no esten vacios, etc (mas adelante)
+            let validation = validationResult(req)
+            //console.log(validation);
+
+            if (!validation.isEmpty()) {
+                return res.render('auth/register', {errors : validation.errors});
+            }
 
         //imaginemos que lo guardemos en el json o base de datos
             let avatar = '';
@@ -59,6 +67,6 @@ module.exports = {
 
             //enviar a otro html que se registro exitosamente
 
-        res.redirect('/');
+        return res.redirect('/');
     }
 }

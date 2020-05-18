@@ -3,6 +3,7 @@ const router = express.Router();
 //me traigo muylter para trabajar con subida de archivos
 const multer = require('multer');
 const path = require('path');
+const {check, validationResult, body} = require('express-validator')
 
 //configuro donde y como se van a llamar los archivos
 const storage = multer.diskStorage({
@@ -32,6 +33,19 @@ router.get('/login', controller.login);
 router.get('/register', controller.register);
 //uso el upload como segundo parametro de la ruta, asi suba primero la imagen y luego vaya al controlador
 //uso el metodo .single y le paso el nombre del imput file para trabajar solo con ese archivo
-router.post('/register', upload.single('avatar'), controller.registerUser);
+router.post('/register',
+    /* aqui deberia de preguntar si el usuario esta logeado, */
+    function (req, res, next) {
+        console.log('Hol soy un Mw');
+        next();
+    },
+    /*subo la imagen*/
+    upload.single('avatar'),
+    /* validar los datos que vienen del formulario */
+    [
+        check('name').isLength({min:2}).withMessage('El nombre al menos debe tener 2 letras'),
+        check('email').isEmail().withMessage('Email invalido')
+    ], 
+   controller.registerUser);
 
 module.exports = router;
