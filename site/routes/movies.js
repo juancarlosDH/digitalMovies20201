@@ -16,15 +16,19 @@ const upload = multer({storage: storage});
 const controller = require('../controllers/movieController')
 
 router.get('/', controller.index);   
+router.post('/', upload.any(), controller.create); 
 
-router.get('/new', controller.formCreate); 
-router.post('/new', upload.any(), controller.create); 
+router.get('/create', controller.formCreate); 
+// --/movies/create
 
-router.get('/detail/:id', controller.detail);
+router.get('/:id', controller.detail);
+// --/movies/12
 
-router.get('/edit/:id', controller.formEdit);
-router.put('/edit/:id', controller.edit);
+router.put('/:id', controller.edit);
 
-router.delete('/delete/:id', controller.delete);
+router.delete('/:id', controller.delete);
+
+router.get('/:id/edit', controller.formEdit);
+// --/movies/12/edit
 
 module.exports = router;

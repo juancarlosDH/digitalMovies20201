@@ -9,15 +9,15 @@
         <div class="titulos">
           <h2>Listado de Peliculas</h2>
           <div>
-            <a href="/movies/new" class="btn btn-primary">Nueva</a>
+            <a href="/movies/create" class="btn btn-primary">Nueva</a>
           </div>
         </div>
         
         <div class="peliculas">
 
-          <% for(peli of listado) { %>
+          <% for(movie of movies) { %>
 
-            <%- include('item-movie', { movie : peli }) %>
+            <%- include('item-movie', { movie }) %>
           
           <% } %>
 

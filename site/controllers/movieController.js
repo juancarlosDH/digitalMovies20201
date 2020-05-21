@@ -1,17 +1,13 @@
+const moviesData = require('./../models/movie');
+
 module.exports = {
 
     index : (req, res) => {
-        console.log(req.query.busqueda);
-        let pelis = [
-            { 'title' : 'Guardianes de la Galaxia', 'id' : 1, 'poster' : '/img/movies/guardianesdelagalaxia.jpg'},
-            { 'title' : 'Avengers', 'id' : 2, 'poster' : '/img/movies/avengers.jpg'},
-            { 'title' : 'StarWars', 'id' : 3, 'poster' : '/img/movies/starwars2.jpg'},
-            { 'title' : 'Capitan America', 'id' : 4, 'poster' : '/img/movies/capitanamerica.jpg'},
-        ];
+        //ahora voy a usar una parte del MVC que se encarga de los datos, la cual es el modelo
+        //ella se encarga de consultar el json y traer los datos.
+        let movies = moviesData.findAll();
 
-        res.render('movies/index', {
-            listado : pelis
-            });
+        res.render('movies/index', { movies });
     },
 
     formCreate : (req, res) => {
@@ -22,19 +18,24 @@ module.exports = {
         //TODO
         //validar los datos (mas adelante)
 
-        //aqui guardo la peli en el json (pendiente)
+        //aqui guardo la peli en el json
         //creo el objeto pelicula, deberia de tener una funcion constructora para eso
-        let pelicula = {
-            id : 5,
+        let poster = '';
+        if (req.files) {
+            //le saco la palabra public para que sea a partir de /img/...
+            poster = req.files[0].path.replace('public/', '/');
+        }
+        let movie = {
             title : req.body.title,
-            poster : req.files[0].path 
+            rating : req.body.rating,
+            poster : poster
         } 
 
-        console.log(pelicula);
         //guardo en el json
+        //moviesData.create(movie);
 
         //redireccionar a listado de peliculas
-        res.redirect('/movies');
+        return res.redirect('movies');
     },
 
     delete : (req, res) => {
@@ -69,12 +70,7 @@ module.exports = {
 
     detail : (req, res) => {
 
-        let pelis = [
-            { 'title' : 'Guardianes de la Galaxia', 'id' : 1, 'poster' : '/img/movies/guardianesdelagalaxia.jpg'},
-            { 'title' : 'Avengers', 'id' : 2, 'poster' : '/img/movies/avengers.jpg'},
-            { 'title' : 'StarWars', 'id' : 3, 'poster' : '/img/movies/starwars2.jpg'},
-            { 'title' : 'Capitan America', 'id' : 4, 'poster' : '/img/movies/capitanamerica.jpg'},
-        ];
+        let pelis = moviesData.findAll();
 
         let pelicula = pelis.find(function (peli) {
             return req.params.id == peli.id;

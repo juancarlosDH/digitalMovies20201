@@ -6,7 +6,7 @@ const bcryptjs = require('bcrypt');
 
 const storage = multer.diskStorage({
   destination : (req, file, cb) => {
-    cb (null, 'public/test');
+    cb (null, 'public/users');
   },
   filename : (req, file, cb) => {
     const nombre = req.body.nombre + '-' + Date.now() + path.extname(file.originalname);

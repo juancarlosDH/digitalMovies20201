@@ -1,0 +1,57 @@
+[
+ {
+  "title": "Guardianes de la Galaxia",
+  "id": 1,
+  "poster": "/img/movies/guardianesdelagalaxia.jpg"
+ },
+ {
+  "title": "Avengers",
+  "id": 2,
+  "poster": "/img/movies/avengers.jpg"
+ },
+ {
+  "title": "StarWars",
+  "id": 3,
+  "poster": "/img/movies/starwars2.jpg"
+ },
+ {
+  "title": "Capitan America",
+  "id": 4,
+  "poster": "/img/movies/capitanamerica.jpg"
+ },
+ {
+  "id": 5,
+  "title": "Avatar la Revelacion 2",
+  "poster": "/img/movies/poster-1589934380186.png"
+ },
+ {
+  "id": 7,
+  "title": "ikariam",
+  "poster": "/img/movies/poster-1589934794362.png"
+ },
+ {
+  "id": 12,
+  "title": "sin las barras",
+  "poster": "/img/movies/poster-1589935147260.png"
+ },
+ {
+  "id": 8,
+  "title": "Fin del mund0",
+  "poster": "/img/movies/poster-1589934874134.png"
+ },
+ {
+  "id": 9,
+  "title": "test final 1",
+  "poster": "/img/movies/poster-1589934918151.png"
+ },
+ {
+  "id": 10,
+  "title": "que paso?",
+  "poster": "/img/movies/poster-1589935019026.png"
+ },
+ {
+  "id": 11,
+  "title": "sddd",
+  "poster": "/img/movies/poster-1589935118692.png"
+ }
+]

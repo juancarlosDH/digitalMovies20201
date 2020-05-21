@@ -25,9 +25,11 @@ app.use(express.static(__dirname + '/../public'));
 //use los method put y delete en las rutas y el formulario
 app.use(methodOverride('_method'));
 
+//middleware para las rutas
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', movieRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
