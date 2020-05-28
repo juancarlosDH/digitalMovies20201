@@ -3,16 +3,12 @@ const bcryptjs = require('bcryptjs');
 
 const {check, validationResult, body} = require('express-validator')
 
+const moviesData = require('./../models/movie');
+
 module.exports = {
     index : function(req, res, next) {
 
-        //pasar a json este array feo
-        let pelis = [
-            { 'title' : 'Guardianes de la Galaxia', 'id' : 1, 'poster' : '/img/movies/guardianesdelagalaxia.jpg'},
-            { 'title' : 'Avengers', 'id' : 2, 'poster' : '/img/movies/avengers.jpg'},
-            { 'title' : 'StarWars', 'id' : 3, 'poster' : '/img/movies/starwars2.jpg'},
-            { 'title' : 'Capitan America', 'id' : 4, 'poster' : '/img/movies/capitanamerica.jpg'},
-        ];
+        let pelis = moviesData.findAll();
 
         //envio datos la vista como segundo parametro
         res.render('home', {
@@ -28,7 +24,30 @@ module.exports = {
     },
 
     login : (req, res) => {
+        //return res.send(req.cookies);
         res.render('auth/login');
+    },
+
+    loginPost: (req, res) => {
+        //deberia de validar datos
+
+        //verificar si la password coincide
+
+        //ahora voy a guardar la cookie de mantenerme logeado
+        if (req.body.mantenerme) {
+            //aqui si creo la cookie y que expire en 90 dias
+            res.cookie('mantenerUsuario', req.body.email,  {expires: new Date(Date.now() + 1000*60*60*24*90)});
+        }
+
+        return res.send(req.body);
+
+        //logear al usuario
+        req.session.logeado = true;
+
+        res.locals.logeado = true;
+
+        console.log('me estoy logeando');
+        return res.redirect('/');
     },
 
     register : (req, res) => {
@@ -36,7 +55,7 @@ module.exports = {
     },
 
     registerUser : (req, res) => {
-        //aqui deberia de validar los datos, que no esten vacios, etc (mas adelante)
+        //aqui deberia de validar los datos, que no esten vacios
             let validation = validationResult(req)
             //console.log(validation);
 

@@ -4,16 +4,26 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride = require('method-override');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
+
+const authMdw = require('./middlewares/auth');
 
 const app = express();
 
 // view engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname , 'views'));
+
+app.use(session({
+  secret : 'Digital Movies',
+  resave : false,
+  saveUninitialized : true
+}));
+app.use(authMdw);
 
 app.use(logger('dev'));
 app.use(express.json());

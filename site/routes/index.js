@@ -29,16 +29,14 @@ router.get('/faqs', controller.faqs);
 router.get('/contact', controller.contact);
 
 router.get('/login', controller.login);
+router.post('/login', controller.loginPost);
 
 router.get('/register', controller.register);
 //uso el upload como segundo parametro de la ruta, asi suba primero la imagen y luego vaya al controlador
 //uso el metodo .single y le paso el nombre del imput file para trabajar solo con ese archivo
 router.post('/register',
-    /* aqui deberia de preguntar si el usuario esta logeado, */
-    function (req, res, next) {
-        console.log('Hol soy un Mw');
-        next();
-    },
+    /* TO-DO aqui deberia de preguntar si el usuario esta logeado, */
+
     /*subo la imagen*/
     upload.single('avatar'),
     /* validar los datos que vienen del formulario */

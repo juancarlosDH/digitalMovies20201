@@ -38,6 +38,19 @@ let movieData = {
             }
         }
         return lastID + 1;
+    },
+
+    filterByTitle : function (title){
+        let array = this.findAll();
+        //filtramos los datos
+        return array.filter(function(movie) {
+            //hago que ambos string sean minusculas con .toLowerCase()
+            //tambien para filtrar y que contenga en cualquier parte esa palabra que me pasaron "title"
+            //para que funcione aplicamos una expresion regular, muy sencilla y facil
+            search = new RegExp(title.toLowerCase())
+            //luego aplicamos el search para hacer una busqueda de esas letras dentro del titulo de cada pelicula, retornara -1 si no la encuentra
+            return movie.title.toLowerCase().search(search) >= 0;
+        });
     }
 }
 
