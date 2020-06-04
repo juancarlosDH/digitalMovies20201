@@ -1,4 +1,5 @@
 const moviesData = require('./../models/movie');
+const genresData = require('./../models/genre');
 const {check, validationResult, body} = require('express-validator')
 
 module.exports = {
@@ -15,12 +16,14 @@ module.exports = {
         //sino las traigo a todas
             movies = moviesData.findAll();
         }
-        res.render('movies/index', { movies });
+        return res.render('movies/index', { movies });
     },
 
     formCreate : (req, res) => {
-        //TO-DO: tengo que agregar generos...
-        res.render('movies/create');
+        //Me traigo los generos
+        let genres = genresData.findAll();
+        //y los mando a la vista
+        return res.render('movies/create', {genres});
     },
 
     create : (req, res) => {
@@ -30,7 +33,7 @@ module.exports = {
         //los datos validados vienen por express-validator
         if (!errors.isEmpty()){
             //TO-DO: mandar errores a la vista, no asi...
-            return res.send(errors);
+            return res.send(errors.mapped());
         }            
 
         //aqui guardo la peli en el json
@@ -40,13 +43,16 @@ module.exports = {
             //le saco la palabra public para que sea a partir de /img/...
             poster = req.file.path.replace('public/', '/');
         }
+        //generé el objeto movie
         let movie = {
             title : req.body.title,
             rating : req.body.rating,
-            poster : poster
+            poster : poster,
+            genreId : req.body.genreId,
+            description : req.body.description
         } 
 
-        //guardo en el json
+        //guardo en el json usando el Modelo
         moviesData.create(movie);
 
         //redireccionar a listado de peliculas
@@ -66,18 +72,39 @@ module.exports = {
     formEdit : (req, res) => {
         //TODO
         //validar que exista el id que me pasaron por la url
-        console.log(req.params.id);
+        let movieId = req.params.id;
 
+        //decirle al modelo que me busque la pelicula
+        let peliEncontrada = moviesData.findByPK(movieId);
+
+        //Me traigo los generos
+        let genres = genresData.findAll();
 
         //muestro el formulario de la movie con sus datos
-        res.render('movies/edit', { movie : peliEncontrada});
+        res.render('movies/edit', { movie : peliEncontrada, genres});
     },
 
     edit : (req, res) => {
         //TODO
         //validar los datos (mas adelante)
 
+        //busco la pelicula
+        let movieId = req.params.id;
+        let movie = moviesData.findByPK(movieId);
+
+        //cambio los atributos
+        movie.title = req.body.title;
+        movie.rating = req.body.rating;
+        movie.genreId = req.body.genreId;
+        movie.description = req.body.description;
+        //si me enviaste la imagen nueva
+        if (req.file) {
+            //le saco la palabra public para que sea a partir de /img/...
+            movie.poster = req.file.path.replace('public/', '/');
+        }
+        
         //aqui edito la peli en el json (pendiente)
+        moviesData.update(movie);
 
         //redireccionar a listado de peliculas
         res.redirect('/movies');

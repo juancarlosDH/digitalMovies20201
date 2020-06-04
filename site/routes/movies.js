@@ -15,14 +15,14 @@ const storage = multer.diskStorage({
 });
 
 //ahora si lo uso, aqui mismo lo valido
-const upload = multer({storage: storage, fileFilter(req, file, cb){
+const upload = multer({storage: storage/*, fileFilter(req, file, cb){
     console.log(file)
     //Validate the files as you wish, this is just an example
     if(file.mimetype === 'image/png') {
-        return cb(null, true);
+        req.file = file
     }
     cb(null, false);
-}});
+}*/});
 
 const controller = require('../controllers/movieController')
 
@@ -30,8 +30,9 @@ router.get('/', controller.index);
 //ruta para guardar los datos de la pelicula
 //primero obtengo el poster que viene del formulario
 router.post('/', upload.single('poster'), [
-    check('title').isLength({min:2}),
-    check('rating').isNumeric(),
+    check('title').isLength({min:2}).withMessage('El titulo al menos debe tener 2 letras'),
+    check('rating').isNumeric().withMessage('El Rating debe ser un numero'),
+    check('genreId').isNumeric().withMessage('Debe seleccionar un genero'),
     //falta validar que no sea una imagen y lanzar el error
 ], controller.create); 
 
@@ -41,7 +42,7 @@ router.get('/create', controller.formCreate);
 router.get('/:id', controller.detail);
 // --/movies/12
 
-router.put('/:id', controller.edit);
+router.put('/:id', upload.single('poster'), controller.edit);
 
 router.delete('/:id', controller.delete);
 

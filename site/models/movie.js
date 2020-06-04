@@ -40,7 +40,7 @@ let movieData = {
         return lastID + 1;
     },
 
-    filterByTitle : function (title){
+    filterByTitle : function(title) {
         let array = this.findAll();
         //filtramos los datos
         return array.filter(function(movie) {
@@ -51,6 +51,28 @@ let movieData = {
             //luego aplicamos el search para hacer una busqueda de esas letras dentro del titulo de cada pelicula, retornara -1 si no la encuentra
             return movie.title.toLowerCase().search(search) >= 0;
         });
+    },
+
+    findByPK : function(id) {
+        return this.findAll().find(function(movie) {
+            return movie.id == id;
+        });
+    },
+
+    update : function(editMovie) {
+        let array = this.findAll();
+        
+        //saco la peli anterior
+        array = array.filter(function(movie) {
+            return movie.id != editMovie.id ;
+        });
+        //pusheo la que me lelgo por parametro
+        array.push(editMovie);
+
+        //convertir a json ese array con la peli nueva
+        jsonData = JSON.stringify(array, null, " ");
+        //escribo
+        fs.writeFileSync(fileData, jsonData);
     }
 }
 

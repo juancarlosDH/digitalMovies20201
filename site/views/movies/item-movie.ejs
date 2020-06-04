@@ -1,17 +1,20 @@
 <div class="pelicula">
-    <div class="cont-imgs">
-      <a href="/movies/<%= movie.id %>">
-        <img src="<%= movie.poster %>" alt="" class="peli-img">
-      </a>
-      <img src="/img/premiere.png" alt="" class="banderin">
-    </div>
-    <div class="rating">
-      <i class="fas fa-star star-rating"></i>
-      <span class="text-rating">9.0</span>
-    </div>
-    <h3 class="peli-titulo"><%= movie.title %></h3>
-    <div>
-      <a href="/movies/<%= movie.id %>/edit" class="btn btn-success">Editar</a>
-      <a href="/movies/<%= movie.id %>" class="btn btn-danger">Eliminar</a>
-    </div>
+  <div class="cont-imgs">
+    <a href="/movies/<%= movie.id %>">
+      <img src="<%= movie.poster %>" alt="" class="peli-img">
+    </a>
+    <img src="/img/premiere.png" alt="" class="banderin">
+  </div>
+  <div class="rating">
+    <i class="fas fa-star star-rating"></i>
+    <span class="text-rating"><%= movie.rating %></span>
+  </div>
+  <h3 class="peli-titulo"><%= movie.title %></h3>
+  <div>
+    <a href="/movies/<%= movie.id %>/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+
+    <a href="/movies/<%= movie.id %>/" class="btn btn-success"><i class="far fa-heart"></i></a>
+    
+    <a href="/movies/<%= movie.id %>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+  </div>
 </div>

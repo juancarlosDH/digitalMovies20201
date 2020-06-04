@@ -9,13 +9,13 @@
         <div class="titulos">
           <h2>Listado de Peliculas</h2>
           <div>
-            <a href="/movies/create" class="btn btn-primary">Nueva</a>
+            <a href="/movies/create" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           </div>
         </div>
         
         <div class="peliculas">
 
-          <% for(movie of movies) { %>
+          <% for(let movie of movies) { %>
 
             <%- include('item-movie', { movie }) %>
           
