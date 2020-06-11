@@ -1,6 +1,9 @@
 const moviesData = require('./../models/movie');
 const genresData = require('./../models/genre');
-const {check, validationResult, body} = require('express-validator')
+const {check, validationResult, body} = require('express-validator');
+
+const db = require('./../database/models');
+const { Op } = require('sequelize');
 
 module.exports = {
 
@@ -11,19 +14,50 @@ module.exports = {
         //como tengo un formulario de busqueda, y es opcional voy a preguntar si me enviaron el dato de filtrado y obtener esas pelis
         if (req.query.busqueda) {
             //cree un metodo dentro del modelo para filtrarlos y le paso lo que viene por el formulario por get
-            movies = moviesData.filterByTitle(req.query.busqueda);
+            //movies = moviesData.filterByTitle(req.query.busqueda);
+
+            db.Movie.findAll({
+                where : {
+                    title : {
+                        [Op.like] : '%' + req.query.busqueda + '%'
+                    }
+                },
+                order : [
+                    ['title', 'ASC']
+                ]
+            })
+                .then(function(movies) {
+                    return res.render('movies/index', { movies });
+                })
         } else {
-        //sino las traigo a todas
-            movies = moviesData.findAll();
+            //sino las traigo a todas
+            db.Movie.findAll({
+                order : [
+                    ['title', 'ASC']
+                ],
+                //esto lo useré en el paginador
+                /*limit : 3,
+                offset : 3*/
+            })
+                .then(function(movies) {
+                    return res.render('movies/index', { movies });
+                })
+            //movies = moviesData.findAll();
         }
-        return res.render('movies/index', { movies });
+        
     },
 
-    formCreate : (req, res) => {
-        //Me traigo los generos
-        let genres = genresData.findAll();
+    //esto lo voy a hacer asincrono, basicamente para entender como podemos hacer para que la promesa de la Base de datos se resuelva en el momento
+    formCreate : async (req, res) => {
+        //Me traigo los generos usando el json
+        //let genres = genresData.findAll();
+        //Ahora voy a usar la BD, aqui le coloqué el await para que me devuelva los datos y no usemos el .then()
+        let genres = await db.Genre.findAll();
+        //console.log(genres);
+            //.then(function(genres){  //lo comenté ya que no lo voy a necesitar.
         //y los mando a la vista
         return res.render('movies/create', {genres});
+            //});
     },
 
     create : (req, res) => {
@@ -49,14 +83,19 @@ module.exports = {
             rating : req.body.rating,
             poster : poster,
             genreId : req.body.genreId,
-            description : req.body.description
+            description : req.body.description,
+            length : 100,
+            awards : 0
         } 
 
         //guardo en el json usando el Modelo
-        moviesData.create(movie);
+        //moviesData.create(movie);
+        db.Movie.create(movie).then(function(){
+            //redireccionar a listado de peliculas
+            return res.redirect('movies');
+        })
 
-        //redireccionar a listado de peliculas
-        return res.redirect('movies');
+        
     },
 
     delete : (req, res) => {
@@ -75,13 +114,24 @@ module.exports = {
         let movieId = req.params.id;
 
         //decirle al modelo que me busque la pelicula
-        let peliEncontrada = moviesData.findByPK(movieId);
+        //let peliEncontrada = moviesData.findByPK(movieId);
 
         //Me traigo los generos
-        let genres = genresData.findAll();
+        //let genres = genresData.findAll();
+        let genres = db.Genre.findAll(); //aqui tengo la primera promesa de la base de datos
 
         //muestro el formulario de la movie con sus datos
-        res.render('movies/edit', { movie : peliEncontrada, genres});
+        //res.render('movies/edit', { movie : peliEncontrada, genres});
+
+        let movie = db.Movie.findByPk(req.params.id); //aqui tengo al segunda promesa de la base de datos
+
+        //Como son dos promesas, tengo que usar Promise
+        Promise.all([genres, movie]) //en este ordenes que tambien voy a recibir los datos
+        //una vez que las dos esten listas
+            .then(function(datos){ //le pueden cambiar el nombre
+                //entonces vamos a usar los resultados, entonces datos es un array donde la [0] es generos y [1] la movie que busqué
+                res.render('movies/edit', { movie : datos[1], genres: datos[0] });
+            });  
     },
 
     edit : (req, res) => {
@@ -112,15 +162,19 @@ module.exports = {
 
     detail : (req, res) => {
         //TO-DO deberia de estar en el modelo y no aqui, pero igual funciona.
-        let pelis = moviesData.findAll();
+        //let pelis = moviesData.findAll();
 
-        let pelicula = pelis.find(function (peli) {
+        /*let pelicula = pelis.find(function (peli) {
             return req.params.id == peli.id;
-        });
+        });*/
+
+        db.Movie.findByPK(req.params.id)
+            .then(function(pelicula){
+                res.render('movies/detail', {
+                    pelicula : pelicula
+                    });
+            });        
         
-        res.render('movies/detail', {
-            pelicula : pelicula
-            });
     }
 
 }
