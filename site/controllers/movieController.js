@@ -90,10 +90,15 @@ module.exports = {
 
         //guardo en el json usando el Modelo
         //moviesData.create(movie);
-        db.Movie.create(movie).then(function(){
-            //redireccionar a listado de peliculas
-            return res.redirect('movies');
-        })
+        db.Movie.create(movie)
+            .then(function(){
+                //redireccionar a listado de peliculas
+                return res.redirect('movies');
+            }).catch(function(error){
+                console.error(error);
+                //TO-DO make error general in an div, res.locals....
+                return res.redirect('/movies/create')
+            })
 
         
     },

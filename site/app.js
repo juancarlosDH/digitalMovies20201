@@ -7,10 +7,11 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 const movieRouter = require('./routes/movies');
 
-const authMdw = require('./middlewares/auth');
+const sessionMdw = require('./middlewares/session');
+const rememberMdw = require('./middlewares/remember');
 
 const app = express();
 
@@ -21,14 +22,17 @@ app.set('views', path.join(__dirname , 'views'));
 app.use(session({
   secret : 'Digital Movies',
   resave : false,
-  saveUninitialized : true
+  saveUninitialized : false
 }));
-app.use(authMdw);
 
+app.use(sessionMdw);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(rememberMdw);
+
 //por defecto express me lo configura
 app.use(express.static(__dirname + '/../public'));
 
@@ -37,7 +41,7 @@ app.use(methodOverride('_method'));
 
 //middleware para las rutas
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', authRouter);
 app.use('/movies', movieRouter);
 
 

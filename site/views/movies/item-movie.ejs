@@ -1,7 +1,7 @@
 <div class="pelicula">
   <div class="cont-imgs">
     <a href="/movies/<%= movie.id %>">
-      <img src="<%= movie.poster %>" alt="" class="peli-img">
+      <img src="<%= movie.poster ? '/img/movies/' + movie.poster : '/img/logo1.jpg' %>" alt="" class="peli-img">
     </a>
     <img src="/img/premiere.png" alt="" class="banderin">
   </div>
