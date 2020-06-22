@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
 
   Movie.associate = function(models) {
     // associations can be defined here
+    Movie.belongsTo(models.Genre, {
+      as : "genre",
+      foreingKey : "genreId"
+    });
   };
 
   return Movie;

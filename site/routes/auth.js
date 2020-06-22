@@ -98,4 +98,6 @@ router.post('/register',
 
 router.get('/profile', authMdw, controller.profile);
 
+router.post('/logout', authMdw, controller.logOut);
+
 module.exports = router;

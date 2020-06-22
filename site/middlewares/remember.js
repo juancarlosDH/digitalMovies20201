@@ -5,6 +5,7 @@ module.exports = (req, res, next) => {
     if (req.cookies['_rememberUser_']) {
         //lo logeo si la cookie esta buena
         req.session.logeado = true;
+        //remember check in DB
         req.session.userEmail = req.cookies['_rememberUser_'];
     }
 

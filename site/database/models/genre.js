@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, DataTypes) => {
-    const Model = sequelize.define('Genre', {
+    const Genre = sequelize.define('Genre', {
         name : {
             type : DataTypes.STRING(100)
         }
@@ -9,5 +9,13 @@ module.exports = (sequelize, DataTypes) => {
         timestamps : false
     });
 
-    return Model;
+    Genre.associate = function(models) {
+        // associations can be defined here
+        Genre.hasMany(models.Movie, {
+          as : "movies",
+          foreingKey : "genreId"
+        });
+      };
+
+    return Genre;
 }

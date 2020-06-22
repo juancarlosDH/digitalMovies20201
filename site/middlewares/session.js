@@ -1,3 +1,4 @@
+const loginService = require('../services/loginService');
 
 module.exports = (req, res, next) => {
 
@@ -5,6 +6,7 @@ module.exports = (req, res, next) => {
 
     if (req.session.logeado) {
         res.locals.logeado = true;
+        loginService.restartSessionTime(req);
     }
 
     next();

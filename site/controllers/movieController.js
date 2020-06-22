@@ -38,10 +38,14 @@ module.exports = {
                 //esto lo useré en el paginador
                 /*limit : 3,
                 offset : 3*/
+                include : ['genre']
             })
-                .then(function(movies) {
-                    return res.render('movies/index', { movies });
-                })
+            .then(function(movies) {
+                return res.render('movies/index', { movies });
+            })
+            .catch(function(error){
+                
+            });
             //movies = moviesData.findAll();
         }
         
@@ -93,7 +97,7 @@ module.exports = {
         db.Movie.create(movie)
             .then(function(){
                 //redireccionar a listado de peliculas
-                return res.redirect('movies');
+                return res.redirect('/movies');
             }).catch(function(error){
                 console.error(error);
                 //TO-DO make error general in an div, res.locals....
@@ -139,13 +143,13 @@ module.exports = {
             });  
     },
 
-    edit : (req, res) => {
+    edit : async (req, res) => {
         //TODO
         //validar los datos (mas adelante)
 
         //busco la pelicula
         let movieId = req.params.id;
-        let movie = moviesData.findByPK(movieId);
+        let movie = await db.Movie.findByPk(movieId);
 
         //cambio los atributos
         movie.title = req.body.title;
@@ -159,20 +163,17 @@ module.exports = {
         }
         
         //aqui edito la peli en el json (pendiente)
-        moviesData.update(movie);
+        await movie.save();
 
         //redireccionar a listado de peliculas
         res.redirect('/movies');
     },
 
     detail : (req, res) => {
-        //TO-DO deberia de estar en el modelo y no aqui, pero igual funciona.
-        //let pelis = moviesData.findAll();
+        //TODO
+        //validar que exista el id que me pasaron por la url
 
-        /*let pelicula = pelis.find(function (peli) {
-            return req.params.id == peli.id;
-        });*/
-
+        //aqui mando a mostrar los datos
         db.Movie.findByPK(req.params.id)
             .then(function(pelicula){
                 res.render('movies/detail', {

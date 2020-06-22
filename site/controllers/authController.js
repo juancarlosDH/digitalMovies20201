@@ -2,6 +2,8 @@
 const bcryptjs = require('bcryptjs');
 
 const db = require('../database/models');
+const loginService = require('../services/loginService');
+const tokenService = require('../services/tokenService');
 
 const { validationResult } = require('express-validator')
 
@@ -16,26 +18,31 @@ module.exports = {
         //antes deberia de revisar si está la cookie
         //deberia de validar datos
         let validation = validationResult(req)
-        console.log(validation.mapped());
+        //console.log(validation.mapped());
 
         if (!validation.isEmpty()) {
             //return res.send(validation.mapped());
             return res.render('auth/login', {errors : validation.mapped(), body : req.body});
         }
 
-        //ahora voy a guardar la cookie de mantenerme logeado
-        if (req.body.mantenerme) {
-            //aqui si creo la cookie y que expire en 90 dias
-            res.cookie('_rememberUser_', req.body.email,  {expires: new Date(Date.now() + 1000*60*60*24*90)});
-        }
-
         //logear al usuario
-        req.session.logeado = true;
-        res.locals.logeado = true;
-        req.session.userEmail = req.body.email;
+        db.User.findOne({where : {email : req.body.email}})
+            .then( async (user) => {
+                //ahora voy a guardar la cookie de mantenerme logeado
+                if (req.body.mantenerme) {
+                    //aqui si creo la cookie y que expire en 90 dias
+                    await tokenService.generateToken(res, user);
+                }
 
-        console.log('me estoy logeando');
-        return res.redirect('/');
+                loginService.loginUser(req, res, user);
+
+                console.log('me estoy logeando');
+                return res.redirect('/profile');
+            }).catch((error) => {
+                console.error(error);
+                return res.redirect('login');
+            })
+       
     },
 
     register : (req, res) => {
@@ -70,11 +77,9 @@ module.exports = {
             //console.log(usuario);
             //guardo en BD
             db.User.create(usuario)
-                .then(function(){
-                    //TODO: que logee al usuario y muestre la pagina del perfil
-                    res.locals.logeado = true;
-                    req.session.logeado = true;
-                    req.session.userEmail = usuario.email;
+                .then(function(user){
+                    //TODO: pasar a un servicio
+                    loginService.loginUser(req, res, user);
 
                     //enviar a otro html que se registro exitosamente
 
@@ -102,5 +107,8 @@ module.exports = {
         }
 
         //usuario guardate
+    },
+    logOut: (req, res) => {
+        loginService.logOutSession(req, res);
     }
 }
