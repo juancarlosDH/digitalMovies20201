@@ -1,7 +1,7 @@
 const tokenService = require('./tokenService');
 
 module.exports = {
-    minutesPerSession : 120000,
+    minutesPerSession : 600000,
     restartSessionTime: function (req) {
         let date = new Date(Date.now() + this.minutesPerSession);
 
@@ -14,6 +14,7 @@ module.exports = {
         req.session.cookie.maxAge = this.minutesPerSession;
 
         res.locals.logeado = true;
+        res.locals.user = user;
         req.session.logeado = true;
         req.session.user = user;
 

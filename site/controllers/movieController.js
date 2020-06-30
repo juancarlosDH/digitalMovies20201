@@ -174,7 +174,7 @@ module.exports = {
         //validar que exista el id que me pasaron por la url
 
         //aqui mando a mostrar los datos
-        db.Movie.findByPK(req.params.id)
+        db.Movie.findByPk(req.params.id, { include : { all : true, nested : true}})
             .then(function(pelicula){
                 res.render('movies/detail', {
                     pelicula : pelicula

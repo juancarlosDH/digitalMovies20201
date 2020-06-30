@@ -15,17 +15,17 @@
         <div class="mini-details ">
           <div class="rating mini-detail-item">
             <i class="fas fa-star star-rating"></i>
-            <span class="text-rating">9.0</span>
+            <span class="text-rating"><%= pelicula.rating %></span>
           </div>
 
           <div class="mini-detail-item">
             <span><i class="fas fa-hourglass-half"></i></span>
-            <span id="duracion">3 h 1 min</span>
+            <span id="duracion"><%= pelicula.length %></span>
           </div>
 
           <div class="mini-detail-item">
             <span></span><i class="fas fa-calendar-day"></i></span>
-            <span id="fecha-lanzamiento">2000</span>
+            <span id="fecha-lanzamiento"><%= pelicula.releaseDate %></span>
           </div>
 
         </div>
@@ -36,7 +36,8 @@
         </div>
 
         <div>
-          <div class="bd-callout bd-callout-detail">Genero</div class="bd-callout bd-callout-primary">
+          <div class="bd-callout bd-callout-detail">Genero : <%= pelicula.genre.name %>
+          </div class="bd-callout bd-callout-primary">
           <div class="bd-callout bd-callout-detail">Actores</div class="bd-callout bd-callout-primary">
         </div>
 

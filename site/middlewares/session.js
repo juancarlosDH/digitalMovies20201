@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
 
     if (req.session.logeado) {
         res.locals.logeado = true;
+        res.locals.user = req.session.user;
         loginService.restartSessionTime(req);
     }
 

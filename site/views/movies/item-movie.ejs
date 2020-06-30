@@ -10,7 +10,7 @@
     <span class="text-rating"><%= movie.rating %></span>
   </div>
   <h3 class="peli-titulo"><%= movie.title %></h3>
-  <h5 class="peli-titulo"><%= movie.genre.name %></h4>
+  <h5 class="peli-titulo"><%= movie.genre ? movie.genre.name : 'Sin genero' %></h4>
   <div>
     <a href="/movies/<%= movie.id %>/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
 

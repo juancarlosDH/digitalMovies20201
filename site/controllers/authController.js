@@ -92,7 +92,8 @@ module.exports = {
                 })
     },
     profile : (req, res) => {
-        return res.send(req.session);
+        //return res.send(res.locals.user);
+        return res.render('auth/profile');
     },
     editProfile : (req,res) => {
         

@@ -7,7 +7,7 @@
       <article class="black-section" id="div-register">
         <h2>Unete a Movies Drop</h2>
          
-        <form class="forms" action="" method="POST" enctype="multipart/form-data">
+        <form class="forms form-register" action="" method="POST" enctype="multipart/form-data">
             <div class="form-group ">
               <label class="" for="title">Nombre</label>
               <input type="text" class="form-control <%= errors.name ? 'is-invalid' : ''%>" id="name" placeholder="Nombre" name="name" value="<%= body.name ? body.name : ''%>">
@@ -62,7 +62,7 @@
 
     </section>
 
-
+    <script src="/js/register.js"></script>
   </div>
 
 <%- include('../partials/footer'); %>

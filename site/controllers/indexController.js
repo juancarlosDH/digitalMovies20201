@@ -11,7 +11,10 @@ module.exports = {
 
         //aqui uso el await para que me traiga las peliculas, hace que la promesa de BD se resueva de una vez.
         let pelis = await db.Movie.findAll({
-            limit : 10
+            limit : 10,
+            include : {
+                all: true, nested : true
+            }
         });
 
         //envio datos la vista como segundo parametro

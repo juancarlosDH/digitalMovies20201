@@ -1,11 +1,13 @@
 <%- include('../partials/header'); %>
 
+  <script src="/js/login.js"></script>
+
     <section class="principal">
 
       <article class="black-section" id="div-login">
         <h2>Ingresa a Movies Drop</h2>
          
-        <form class="forms" action="" method="POST">
+        <form class="forms form-login" action="" method="POST">
             <div class="form-group">
               <label class="" for="rating">Email</label>
               <div class="input-group">
@@ -20,7 +22,7 @@
               <label class="" for="password">Password</label>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fas fa-user-lock"></i></div>
+                  <div id="pass-mostrar" class="input-group-text"><i class="fas fa-user-lock"></i></div>
                 </div>
                 <input type="password" class="form-control <%= errors.password ? 'is-invalid' : ''%>" id="password" placeholder="Password" name="password">
                 <div class="invalid-feedback"><%= errors.password ? errors.password.msg : ''%></div>
@@ -38,8 +40,19 @@
             </div>
 
             <div class="separate-buttons">
-                <button type="submit" class="btn btn-danger">Con Google</button>
-                <button type="submit" class="btn btn-primary">Con FB</button>
+                <a href="http://www.google.com" id="boton-google" class="btn btn-danger">Con Google</a>
+                <a href="http://www.facebook.com" class="btn btn-primary">Con FB</a>
+            </div>
+
+            <div>
+              Tambien el texto
+              <button type="button" class="btn btn-danger" id="eliminarme">Eliminarme</button>
+            </div>
+
+            <div>
+              Crono
+              <span id="numeros">0</span>
+              <button type="button" class="btn btn-primary" id="iniciar">Play</button>
             </div>
         </form>
             
