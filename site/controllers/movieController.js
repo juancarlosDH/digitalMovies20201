@@ -181,6 +181,18 @@ module.exports = {
                     });
             });        
         
+    },
+
+    transferencia : () => {
+        //inicio una transaccion
+
+            //restar monto
+
+            //generar movimiento
+
+            //sumar monto
+
+            //commit de la transaccion
     }
 
 }

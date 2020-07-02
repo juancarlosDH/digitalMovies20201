@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     password : {
       type : DataTypes.STRING(200)
+    },
+    admin : {
+      type : DataTypes.BOOLEAN
     }
   },
   {

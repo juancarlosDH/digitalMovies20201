@@ -10,16 +10,32 @@ module.exports = {
         await db.Token.create({ userId : user.id, token : token, expiresAt : expires })
         res.cookie('_rememberUserToken_', token,  {expires: expires});
     },
-    getUserToken : (user) => {
+    getUserByToken : (token) => {
+        //devuelve el usuari dado un token
 
     },
     checkUserToken : (user) => {
+        //retorna true si el usuario tiene un token
 
     },
-    verifyToken : (token) => {
+    verifyToken : function (token) {
+        //retorna si el token es correcto y no ha espirado
+        //aqui buscar en tabla si existe ese token
+        db.Token.findOne({token:token})
+            .then(tokenUser => {
+                //deberia de revisar si el token expiró
+                const fechaActual = new Date();
+                if (tokenUser.expiresAt < fechaActual) {
+                    //eliminar el token
+                    this.deleteToken(token);
+                    return false;
+                }
+
+                return true;
+            })
 
     },
     deleteToken : (token) => {
-
+        //este elimina el token de la tabla
     }
 }
