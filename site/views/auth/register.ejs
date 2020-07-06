@@ -44,10 +44,13 @@
               </div>
             <div class="">
               <label class="" for="poster">Avatar</label>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input <%= errors.avatar ? 'is-invalid' : ''%>" id="avatar" name="avatar">
+              <div class="">
+                <input type="file" class=" <%= errors.avatar ? 'is-invalid' : ''%>" id="poster" name="avatar">
                 <label class="custom-file-label" for="avatar">Selecciona una imagen</label>
                 <div class="invalid-feedback"><%= errors.avatar ? errors.avatar.msg : ''%></div>
+              </div>
+              <div id="photo-preload">
+                <img src="" alt="Preview">
               </div>
             </div>
             

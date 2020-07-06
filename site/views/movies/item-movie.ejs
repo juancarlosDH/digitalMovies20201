@@ -14,7 +14,9 @@
   <div>
     <a href="/movies/<%= movie.id %>/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
 
-    <a href="/movies/<%= movie.id %>/" class="btn btn-success"><i class="far fa-heart"></i></a>
+    <a href="#" class="btn btn-success buttonHeart" data-movieId="<%= movie.id %>">
+      <i class="far fa-heart"></i>
+    </a>
     
     <a href="/movies/<%= movie.id %>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
   </div>

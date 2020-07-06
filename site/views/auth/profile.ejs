@@ -8,13 +8,13 @@
                     <div class="col-md-12 col-12 user-detail-main border mb-3 pb-2">
                         <div class="row">
                             <div class="col-md-12 col-12 profile-back">
-                                <img src="http://nicesnippets.com/demo/profile-1.jpg" class="rounded-circle">
+                                <img src="/img/users/avatars/<%= locals.user.avatar %>" class="rounded-circle">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-12 user-detail text-center">
                                 <h4 class="m-0"><strong><%= locals.user.name %></strong></h4>
-                                <p class="m-0">Web Developer</p>
+                                <p class="m-0"><strong><%= locals.user.email %></p>
                                 <p class="mb-1">Aatman Infotech</p>
                                 <button class="btn btn-info btn-sm">FOLLOWER</button>
                                 <button class="btn btn-primary btn-sm">FOLLOWING</button>
@@ -27,7 +27,7 @@
                         <div id="accordionMyStory" class="mb-2">
                           <div class="card rounded-0 story-card">
                             <div class="card-header rounded-0 pt-2 pb-2" id="headingMyStory">
-                                <h6 class="mb-0">My Story</h6>
+                                <h6 class="mb-0">My Movies</h6>
                                 <a class="float-right" data-toggle="collapse" data-target="#collapseMyStory" aria-expanded="true" aria-controls="collapseMyStory">
                                     <i class="icon fa fa-minus"></i>
                                 </a>
@@ -35,20 +35,9 @@
                             <div id="collapseMyStory" class="collapse show" aria-labelledby="headingMyStory" data-parent="#accordionMyStory">
                               <div class="card-body pt-2 pb-2">
                                 <div class="body-section mb-3">
-                                    <h6 class="section-heading mb-1"><strong>About</strong></h6>
-                                    <p class="section-content m-0">Write something about you.</p>
+                                    <h6 class="section-heading mb-1"><strong>Primera</strong></h6>
                                 </div>
-                                <div class="body-section mb-3">
-                                    <h6 class="section-heading mb-1"><strong>Introduction</strong></h6>
-                                    <p class="section-content m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt.</p>
-                                </div>
-                                <div class="body-section mb-3">
-                                    <h6 class="section-heading mb-1"><strong>Achievement</strong></h6>
-                                    <p class="section-content m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt.</p>
-                                </div>
-                                <button class="btn btn-info btn-sm">Edit</button>
+                                <button class="btn btn-info btn-sm">Add</button>
                               </div>
                             </div>
                           </div>

@@ -9,6 +9,8 @@ const session = require('express-session');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const movieRouter = require('./routes/movies');
+const userRouter = require('./routes/users');
+const omdbRouter = require('./routes/omdb');
 
 const sessionMdw = require('./middlewares/session');
 const rememberMdw = require('./middlewares/remember');
@@ -43,6 +45,8 @@ app.use(methodOverride('_method'));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/movies', movieRouter);
+app.use('/users', userRouter);
+app.use('/omdb', omdbRouter);
 
 
 // catch 404 and forward to error handler

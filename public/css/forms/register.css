@@ -1,7 +1,13 @@
-#name:hover {
-    background-color: aquamarine;
+#photo-preload {
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    background-color: #FFF;
+    display: none;
 }
 
-#name:focus ~ label{
-    background-color: blue;
+#photo-preload img{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid gray;
 }
