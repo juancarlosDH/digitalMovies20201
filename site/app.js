@@ -45,7 +45,7 @@ app.use(methodOverride('_method'));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/movies', movieRouter);
-app.use('/users', userRouter);
+app.use('/api/users', userRouter);
 app.use('/omdb', omdbRouter);
 
 

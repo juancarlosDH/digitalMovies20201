@@ -49,4 +49,6 @@ router.delete('/:id', controller.delete);
 router.get('/:id/edit', controller.formEdit);
 // --/movies/12/edit
 
+router.post('/omdb/:imdbID', controller.saveOmdb);
+
 module.exports = router;

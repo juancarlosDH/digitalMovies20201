@@ -32,9 +32,13 @@ window.addEventListener('load', function(){
 
             titulo.innerHTML = 'Resultados';
             for (const buscado of respuestaEnJson.Search) {
+                console.log(buscado);
                 listado.innerHTML += `<div class="item-resultado">
                     <h6>${buscado.Title}</h6>
                     <img src="${buscado.Poster}" class="img-resultado"/>
+                    <form action="/movies/omdb/${buscado.imdbID}" method="POST">
+                        <button type="submit">Guardar en mi BD</button>
+                    </form>
                 </div>`
             }
 

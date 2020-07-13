@@ -5,6 +5,8 @@ const {check, validationResult, body} = require('express-validator');
 const db = require('./../database/models');
 const { Op } = require('sequelize');
 
+const ombdResource = require('../resources/omdb/omdbResource');
+
 module.exports = {
 
     index : (req, res) => {
@@ -26,14 +28,14 @@ module.exports = {
                     ['title', 'ASC']
                 ]
             })
-                .then(function(movies) {
-                    return res.render('movies/index', { movies });
-                })
+            .then(function(movies) {
+                return res.render('movies/index', { movies });
+            })
         } else {
             //sino las traigo a todas
             db.Movie.findAll({
                 order : [
-                    ['title', 'ASC']
+                    [(req.query.order ? req.query.order : 'title'), 'ASC']
                 ],
                 //esto lo useré en el paginador
                 /*limit : 3,
@@ -79,7 +81,7 @@ module.exports = {
         let poster = '';
         if (req.file) {
             //le saco la palabra public para que sea a partir de /img/...
-            poster = req.file.path.replace('public/', '/');
+            poster = req.file.filename;
         }
         //generé el objeto movie
         let movie = {
@@ -143,26 +145,32 @@ module.exports = {
             });  
     },
 
+    //esta funcion la convierto a sincrona para trabajar de manera mas comoda las promesas de sequelize
     edit : async (req, res) => {
         //TODO
         //validar los datos (mas adelante)
 
         //busco la pelicula
         let movieId = req.params.id;
+        //uso el await para esperar que termine la promesa
         let movie = await db.Movie.findByPk(movieId);
 
         //cambio los atributos
         movie.title = req.body.title;
         movie.rating = req.body.rating;
         movie.genreId = req.body.genreId;
+        movie.awards = req.body.awards;
+        movie.length = req.body.length;
+        movie.releaseDate = req.body.releaseDate;
+        
         movie.description = req.body.description;
         //si me enviaste la imagen nueva
         if (req.file) {
             //le saco la palabra public para que sea a partir de /img/...
-            movie.poster = req.file.path.replace('public/', '/');
+            movie.poster = req.file.filename;
         }
         
-        //aqui edito la peli en el json (pendiente)
+        //aqui edito la peli en la base de datos, uso await para esperar que termine la promesa
         await movie.save();
 
         //redireccionar a listado de peliculas
@@ -183,16 +191,35 @@ module.exports = {
         
     },
 
-    transferencia : () => {
-        //inicio una transaccion
+    saveOmdb : function (req, res) {
+        //deberia de invocar al resource o cliente de omdb
+        ombdResource.getMovieFromImdb(req.params.imdbID)
+            .then(function(response) {
+                console.log(response);
 
-            //restar monto
+                //TO-DO guardar en mi base de datos
+                let movie = {
+                    title : response.data.Title,
+                    genreId : 1, //
+                    length : 100,
+                };
 
-            //generar movimiento
+                db.Movie.create(movie)
+                .then(function(){
+                    //redireccionar a listado de peliculas
+                    return res.redirect('/movies');
+                }).catch(function(error){
+                    console.error(error);
+                    //TO-DO make error general in an div, res.locals....
+                    return res.redirect('/movies')
+                })
 
-            //sumar monto
 
-            //commit de la transaccion
+                //return res.send('Guardada en mi BD');
+            }).catch(function(error) {
+                console.log(error);
+            })
+
     }
 
 }

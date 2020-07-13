@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     genreId : DataTypes.INTEGER,
     releaseDate : DataTypes.DATE,
     poster : DataTypes.STRING,
-    length : DataTypes.INTEGER
+    length : DataTypes.INTEGER,
+    description : DataTypes.STRING,
   }, {
       tableName : 'movies'
   });
