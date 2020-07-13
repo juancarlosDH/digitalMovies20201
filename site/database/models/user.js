@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   },
   {
-    timestamps : false,
     tableName : 'users'
   });
 
@@ -28,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     Model.belongsToMany(models.Movie, { 
       as : 'favorites',
       through: 'movie_user',
-      timestamps : false,
       foreignKey : 'userId',
       otherKey : 'movieId',
     });

@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
         }
     },{
         tableName: 'genres',
-        timestamps : false
     });
 
     Genre.associate = function(models) {
