@@ -93,7 +93,12 @@ module.exports = {
     },
     profile : (req, res) => {
         //return res.send(res.locals.user);
-        return res.render('auth/profile');
+        db.User.findByPk(res.locals.user.id, { include : ['favorites'] })
+            .then(function(user) {
+                //console.log(user.favorites);
+                const movieFavorites = user.favorites;
+                return res.render('auth/profile', { movieFavorites });
+            });
     },
     editProfile : (req,res) => {
         

@@ -35,13 +35,15 @@
                             <div id="collapseMyStory" class="collapse show" aria-labelledby="headingMyStory" data-parent="#accordionMyStory">
                               <div class="card-body pt-2 pb-2">
                                 <div class="body-section mb-3">
-                                    <h6 class="section-heading mb-1"><strong>Primera</strong></h6>
+                                  <% for(const movie of movieFavorites) { %>
+                                    <h6 class="section-heading mb-1"><strong><%= movie.title %></strong></h6>
+                                  <% } %>
                                 </div>
                                 <button class="btn btn-info btn-sm">Add</button>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        <!--</div>
                         <div id="accordionMyPlan">
                           <div class="card rounded-0 story-card">
                             <div class="card-header rounded-0 pt-2 pb-2" id="headingMyPlan">
@@ -68,9 +70,9 @@
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div>-->
                     </div>
-                    <div class="col-md-4 col-12 mt-4 accordion-group-two">
+                    <!--<div class="col-md-4 col-12 mt-4 accordion-group-two">
                         <div id="accordionUserInfo" class="mb-2">
                           <div class="card rounded-0 info-card">
                             <div class="card-header rounded-0 pt-2 pb-2" id="headingUserInfo">
@@ -205,7 +207,7 @@
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

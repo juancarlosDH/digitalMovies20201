@@ -32,18 +32,28 @@ module.exports = {
                 return res.render('movies/index', { movies });
             })
         } else {
+            let offset = 0;
+            let limit = 6;
+            //si me mandan la pagina entonces voy a calcular el offset
+            if (req.query.page) {
+                offset = (req.query.page - 1) * limit;
+            }
+
             //sino las traigo a todas
-            db.Movie.findAll({
+            db.Movie.findAndCountAll({
                 order : [
                     [(req.query.order ? req.query.order : 'title'), 'ASC']
                 ],
                 //esto lo useré en el paginador
-                /*limit : 3,
-                offset : 3*/
+                limit : limit,
+                offset : offset,
                 include : ['genre']
             })
-            .then(function(movies) {
-                return res.render('movies/index', { movies });
+            .then(function(data) {
+                const movies = data.rows;
+                const count = data.count;
+                const pages = Math.ceil(count / limit);
+                return res.render('movies/index', { movies, pages });
             })
             .catch(function(error){
                 
@@ -195,7 +205,6 @@ module.exports = {
         //deberia de invocar al resource o cliente de omdb
         ombdResource.getMovieFromImdb(req.params.imdbID)
             .then(function(response) {
-                console.log(response);
 
                 //TO-DO guardar en mi base de datos
                 let movie = {
