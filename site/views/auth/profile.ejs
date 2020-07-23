@@ -8,7 +8,7 @@
                     <div class="col-md-12 col-12 user-detail-main border mb-3 pb-2">
                         <div class="row">
                             <div class="col-md-12 col-12 profile-back">
-                                <img src="/img/users/avatars/<%= locals.user.avatar %>" class="rounded-circle">
+                                <img src="/img/users/avatars/<%= (locals.user.avatar ? locals.user.avatar : 'default.png') %>" class="rounded-circle">
                             </div>
                         </div>
                         <div class="row">
@@ -36,7 +36,10 @@
                               <div class="card-body pt-2 pb-2">
                                 <div class="body-section mb-3">
                                   <% for(const movie of movieFavorites) { %>
-                                    <h6 class="section-heading mb-1"><strong><%= movie.title %></strong></h6>
+                                    <form action="/remove-favorite/<%= movie.id %>?_method=DELETE" method="POST">
+                                      <h6 class="section-heading mb-1"><strong><%= movie.title %></strong>
+                                      <button type="submit">Eliminar</button></h6>
+                                    </form>
                                   <% } %>
                                 </div>
                                 <button class="btn btn-info btn-sm">Add</button>

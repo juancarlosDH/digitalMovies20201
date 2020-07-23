@@ -100,4 +100,23 @@ router.get('/profile', authMdw, controller.profile);
 
 router.post('/logout', authMdw, controller.logOut);
 
+//juanca@juan.com
+router.delete('/remove-favorite/:movie_id', async function (req, res) {
+    //Guardar en la base de datos la pelicula que le gusta al usuario
+  
+    if (!req.session || !req.session.user) {
+        return res.json({ status : 401 , response : 'usuario no logeado'});
+    }
+  
+    let user = await db.User.findByPk(req.session.user.id);
+    
+    let movie = await db.Movie.findByPk(req.params.movie_id);
+  
+    //uso el metodo magico remove seguido del alias que coloque en la ralacion
+    user.removeFavorites(movie);
+  
+    //redirijo
+    return res.redirect('/profile');
+  });
+
 module.exports = router;

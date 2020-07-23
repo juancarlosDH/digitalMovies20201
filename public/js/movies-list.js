@@ -6,7 +6,7 @@ window.addEventListener('load', function(){
             const anclaje = this;
             const movieId = this.getAttribute('data-movieId');
             
-            fetch('http://localhost:3001/api/users/addFavourite', {
+            fetch('http://localhost:3000/api/users/addFavourite', {
                 method : 'POST',
                 body : JSON.stringify({
                     user_id : 1,

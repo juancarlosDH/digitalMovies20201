@@ -65,7 +65,7 @@ module.exports = {
             //este es el archivo que se subio con el upload.single de la ruta por post: req.file.path
             if (req.file) {
                 //le saco la palabra public para que sea a partir de /img/...
-                avatar = req.file.path.replace('public/', '/');
+                avatar = req.file.filename;
             }
             //creo el objeto usuario, deberia de tener una funcion constructora para eso
             let usuario = {
