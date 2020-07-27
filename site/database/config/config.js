@@ -7,7 +7,13 @@ module.exports = {
     "database": process.env.DB_DATABASE,
     "host":     process.env.DB_HOST,
     "dialect": "mysql",
-    "operatorsAliases": 0
+    "operatorsAliases": 0,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   },
   "test": {
     "username": "root",

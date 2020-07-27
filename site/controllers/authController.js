@@ -18,7 +18,7 @@ module.exports = {
         //antes deberia de revisar si está la cookie
         //deberia de validar datos
         let validation = validationResult(req)
-        //console.log(validation.mapped());
+        //console.log(validation);
 
         if (!validation.isEmpty()) {
             //return res.send(validation.mapped());

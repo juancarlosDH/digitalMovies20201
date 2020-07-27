@@ -5,12 +5,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const cors = require("cors");
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const movieRouter = require('./routes/movies');
 const userRouter = require('./routes/users');
+const authJwtRouter = require('./routes/authJwt');
 const omdbRouter = require('./routes/omdb');
+const apiMovies = require('./routes/apiMovies');
+const apiGenres = require('./routes/apiGenres');
 
 const sessionMdw = require('./middlewares/session');
 const rememberMdw = require('./middlewares/remember');
@@ -26,6 +30,10 @@ app.use(session({
   resave : false,
   saveUninitialized : false
 }));
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
 
 app.use(sessionMdw);
 app.use(logger('dev'));
@@ -46,6 +54,9 @@ app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/movies', movieRouter);
 app.use('/api/users', userRouter);
+app.use('/api/users', authJwtRouter);
+app.use('/api/movies', cors(corsOptions), apiMovies);
+app.use('/api/genres', cors(corsOptions), apiGenres);
 app.use('/omdb', omdbRouter);
 
 app.get('/dashboard', function(req, res) {

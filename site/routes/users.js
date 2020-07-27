@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/models');
 
+
+
 router.post('/addFavourite', async function (req, res) {
     //Guardar en la base de datos la pelicula que le gusta al usuario
 
