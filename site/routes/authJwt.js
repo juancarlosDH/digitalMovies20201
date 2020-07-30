@@ -7,7 +7,7 @@ const controller = require('../controllers/api/authController');
 const db = require('../database/models');
 const authJwt = require('../middlewares/authJwt');
 
-router.post('/signup', [
+router.post('/login', [
     check('password').isLength({min:4})
         .withMessage('Invalid Password, min 4 characters'),
     check('email').isEmail().withMessage('Invalid Email').bail(),

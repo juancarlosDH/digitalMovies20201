@@ -1,14 +1,18 @@
 
-module.exports = (req, res, next) => {
+const db = require('./../database/models');
+
+module.exports = async (req, res, next) => {
 
     //cookie sencilla de mantenerme logeado
-    if (req.cookies['_rememberUser_']) {
+    if (req.cookies['_rememberEmail_']) {
         //TO_DO verificar el token
-        
-        //lo logeo si la cookie esta buena
+        //cambiar al token...
+        let user = await db.User.findOne({where: {email : req.cookies['_rememberEmail_'] } });
+                
+        res.locals.logeado = true;
+        res.locals.user = user;
         req.session.logeado = true;
-        //remember check in DB
-        req.session.userEmail = req.cookies['_rememberUser_'];
+        req.session.user = user;
     }
 
     next();

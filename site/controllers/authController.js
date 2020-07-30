@@ -30,6 +30,8 @@ module.exports = {
             .then( async (user) => {
                 //ahora voy a guardar la cookie de mantenerme logeado
                 if (req.body.mantenerme) {
+                    let expires = new Date(Date.now() + 1000*60*60*24*90);
+                    res.cookie('_rememberEmail_', req.body.email,  {expires: expires});
                     //aqui si creo la cookie y que expire en 90 dias
                     await tokenService.generateToken(res, user);
                 }
@@ -115,6 +117,10 @@ module.exports = {
         //usuario guardate
     },
     logOut: (req, res) => {
+        //esto no deberia de ir, sino el token
+        let expires = new Date(Date.now() - 1 );
+        res.cookie('_rememberEmail_', '',  {expires: expires});
+        //el token lo deberia de manejar este servicio
         loginService.logOutSession(req, res);
     }
 }

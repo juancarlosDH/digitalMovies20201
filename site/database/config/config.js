@@ -8,6 +8,7 @@ module.exports = {
     "host":     process.env.DB_HOST,
     "dialect": "mysql",
     "operatorsAliases": 0,
+    "port" : process.env.DB_PORT,
     pool: {
       max: 5,
       min: 0,

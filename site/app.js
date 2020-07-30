@@ -54,7 +54,7 @@ app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/movies', movieRouter);
 app.use('/api/users', userRouter);
-app.use('/api/users', authJwtRouter);
+app.use('/api/auth', cors(corsOptions), authJwtRouter);
 app.use('/api/movies', cors(corsOptions), apiMovies);
 app.use('/api/genres', cors(corsOptions), apiGenres);
 app.use('/omdb', omdbRouter);
