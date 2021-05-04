@@ -9,6 +9,7 @@ const cors = require("cors");
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const checkoutRouter = require('./routes/checkout');
 const movieRouter = require('./routes/movies');
 const userRouter = require('./routes/users');
 const authJwtRouter = require('./routes/authJwt');
@@ -18,6 +19,7 @@ const apiGenres = require('./routes/apiGenres');
 
 const sessionMdw = require('./middlewares/session');
 const rememberMdw = require('./middlewares/remember');
+const { check } = require('express-validator');
 
 const app = express();
 
@@ -52,6 +54,7 @@ app.use(methodOverride('_method'));
 //middleware para las rutas
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/', checkoutRouter);
 app.use('/movies', movieRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', cors(corsOptions), authJwtRouter);

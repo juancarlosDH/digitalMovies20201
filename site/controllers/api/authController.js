@@ -28,16 +28,15 @@ module.exports = {
         
         User.findOne({
             where: {
-                email: req.body.email
+                email: req.body.email,
+                admin : true
             }
         })
         .then(user => {
             if (!user) {
                 return res.status(400).send({
                     accessToken:  null,
-                    errors : {
-                        message: ["Wrong Credentials!!!"]
-                    }
+                    errors : ["Wrong Credentials!!!"]
                 });
             }
         
@@ -49,14 +48,12 @@ module.exports = {
             if (!passwordIsValid) {
                 return res.status(401).send({
                     accessToken:  null,
-                    errors : {
-                        message: [ "Wrong Credentials!!!!" ]
-                    },
+                    errors : [ "Wrong Credentials!!!!" ]
                 });
             }
         
             var token = jwt.sign({ id: user.id }, (process.env.JWT_SECRET ? process.env.JWT_SECRET : 'NO_SET_JWT') , {
-                expiresIn: 60*60*24 // 24 hours
+                expiresIn: 60*60 // 1 hours
             });
         
 
@@ -72,11 +69,25 @@ module.exports = {
             res.status(500).send({
                 //must log in file the error
                 accessToken:  null,
-                errors : {
-                    message: [ "Error: contact us" ]
-                },
+                errors : [ "Error: contact us" ],
             });
         });
+    },
+
+    verifyUser : async (req, res) => {
+        
+        var user = await User.findByPk(req.userId);
+        
+        if (user){
+            return res.status(200).send({
+                valid : true,
+            });
+        }
+
+        return res.status(401).send({
+                errors :["User not exists"],
+            });
+        
     },
 
 }
